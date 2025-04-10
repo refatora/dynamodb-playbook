@@ -5,16 +5,16 @@ A collection of DynamoDB knowledge, guides, and tips.
 
 While DynamoDB is a powerful, it’s not the right fit for every use case. Here are scenarios where you might want to consider other options:
 
-1. Unpredictable or Ad Hoc Query Patterns
+1. **Unpredictable or Ad Hoc Query Patterns**
 DynamoDB performs best when your access patterns are well-defined in advance. If your application requires flexible, dynamic queries—such as filtering on many different fields, full-text search, or ad hoc reporting; then, DynamoDB can become limiting or inefficient.
 
-2. You Need Complex Relational Logic
+2. **You Need Complex Relational Logic**
 DynamoDB doesn't support joins like a traditional relational database. If your application depends heavily on multi-table joins or complex relational logic, a relational database may be a better fit.
 
-3. Large Binary Objects (BLOBs)
+3. **Large Binary Objects (BLOBs)**
 DynamoDB binary or blob data (like images, videos, or documents) is limited to 400KB per item.
 
-4. You’re On a Tight Budget With Unpredictable Access Patterns
+4. **You’re On a Tight Budget With Unpredictable Access Patterns**
 DynamoDB can get expensive if you have unpredictable or spiky workloads it is important to analyze cost implications.
 
 ## When to Use DynamoDB
