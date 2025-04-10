@@ -5,31 +5,31 @@ A collection of DynamoDB knowledge, guides, and tips.
 
 While DynamoDB is a powerful, it’s not the right fit for every use case. Here are scenarios where you might want to consider other options:
 
-1. **Unpredictable or Ad Hoc Query Patterns**
+#### Unpredictable or Ad Hoc Query Patterns
 DynamoDB performs best when your access patterns are well-defined in advance. If your application requires flexible, dynamic queries—such as filtering on many different fields, full-text search, or ad hoc reporting; then, DynamoDB can become limiting or inefficient.
 
-2. **You Need Complex Relational Logic**
+#### You Need Complex Relational Logic
 DynamoDB doesn't support joins like a traditional relational database. If your application depends heavily on multi-table joins or complex relational logic, a relational database may be a better fit.
 
-3. **Large Binary Objects (BLOBs)**
+#### Large Binary Objects (BLOBs)
 DynamoDB binary or blob data (like images, videos, or documents) is limited to 400KB per item.
 
-4. **You’re On a Tight Budget With Unpredictable Access Patterns**
+#### You’re On a Tight Budget With Unpredictable Access Patterns
 DynamoDB can get expensive if you have unpredictable or spiky workloads it is important to analyze cost implications.
 
 ## When to Use DynamoDB
 
 DynamoDB shines in specific use cases where its strengths—scalability, performance, and architecture can be fully leveraged. Here are some of the best scenarios for using DynamoDB:
 
-1. **Well-Defined, High-Volume Access Patterns**
+#### Well-Defined, High-Volume Access Patterns
 
 DynamoDB performs exceptionally well when your access patterns are predictable and operations are targeted by specific keys. It's ideal for applications that require low-latency lookups at scale.
 
-2. **Massive Scale with Low Latency**
+#### Massive Scale with Low Latency
 
 DynamoDB is designed to scale horizontally and handle millions of requests per second with single-digit millisecond latency. If your app has globally distributed users and requires real-time performance, DynamoDB can handle the load without manual intervention.
 
-3. **Workloads Needing High Availability and Durability**
+#### Workloads Needing High Availability and Durability
 
 DynamoDB automatically replicates data across multiple Availability Zones in a region, offering built-in fault tolerance and high durability with minimal configuration. It also supports global tables for multi-region replication if you need cross-region availability.
 
