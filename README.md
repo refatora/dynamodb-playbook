@@ -1,37 +1,34 @@
 ## dynamodb-playbook  
-A collection of DynamoDB knowledge, guides, and tips.
+A collection of DynamoDB guides and tips.
+
+> [What is Amazon DynamoDB?](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html)
+>
+> Amazon DynamoDB is a serverless, NoSQL, fully managed database with single-digit millisecond performance at any scale.
 
 ## When Not to Use DynamoDB
 
 While DynamoDB is a powerful, it’s not the right fit for every use case. Here are scenarios where you might want to consider other options:
 
-#### Unpredictable or Ad Hoc Query Patterns
-DynamoDB performs best when your access patterns are well-defined in advance. If your application requires flexible, dynamic queries—such as filtering on many different fields, full-text search, or ad hoc reporting; then, DynamoDB can become limiting or inefficient.
+- **Unpredictable or Ad Hoc Query Patterns**: DynamoDB performs best when your access patterns are well-defined in advance. If your application requires flexible, dynamic queries—such as filtering on many different fields, full-text search, or ad hoc reporting; then, DynamoDB can become limiting or inefficient.
 
-#### You Need Complex Relational Logic
+- **You Need Complex Relational Logic**
 DynamoDB doesn't support joins like a traditional relational database. If your application depends heavily on multi-table joins or complex relational logic, a relational database may be a better fit.
 
-#### Large Binary Objects (BLOBs)
+- **Large Binary Objects (BLOBs)**
 DynamoDB binary or blob data (like images, videos, or documents) is limited to 400KB per item.
 
-#### You’re On a Tight Budget With Unpredictable Access Patterns
+- **You’re On a Tight Budget With Unpredictable Access Patterns**
 DynamoDB can get expensive if you have unpredictable or spiky workloads it is important to analyze cost implications.
 
 ## When to Use DynamoDB
 
 DynamoDB shines in specific use cases where its strengths—scalability, performance, and architecture can be fully leveraged. Here are some of the best scenarios for using DynamoDB:
 
-#### Well-Defined, High-Volume Access Patterns
+- **Well-Defined, High-Volume Access Patterns**: DynamoDB performs exceptionally well when your access patterns are predictable and operations are targeted by specific keys. It's ideal for applications that require low-latency lookups at scale.
 
-DynamoDB performs exceptionally well when your access patterns are predictable and operations are targeted by specific keys. It's ideal for applications that require low-latency lookups at scale.
+- **Massive Scale with Low Latency**: DynamoDB is designed to scale horizontally and handle millions of requests per second with single-digit millisecond latency. If your app has globally distributed users and requires real-time performance, DynamoDB can handle the load without manual intervention.
 
-#### Massive Scale with Low Latency
-
-DynamoDB is designed to scale horizontally and handle millions of requests per second with single-digit millisecond latency. If your app has globally distributed users and requires real-time performance, DynamoDB can handle the load without manual intervention.
-
-#### Workloads Needing High Availability and Durability
-
-DynamoDB automatically replicates data across multiple Availability Zones in a region, offering built-in fault tolerance and high durability with minimal configuration. It also supports global tables for multi-region replication if you need cross-region availability.
+- **Workloads Needing High Availability and Durability**: DynamoDB automatically replicates data across multiple Availability Zones in a region, offering built-in fault tolerance and high durability with minimal configuration. It also supports global tables for multi-region replication if you need cross-region availability.
 
 ## Core Components
 
