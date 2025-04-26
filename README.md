@@ -9,7 +9,7 @@ A collection of DynamoDB guides and tips.
 
 While DynamoDB is a powerful, it’s not the right fit for every use case. Here are scenarios where you might want to consider other options:
 
-- **Unpredictable or Ad Hoc Query Patterns**: DynamoDB performs best when your access patterns are well-defined in advance. If your application requires flexible, dynamic queries—such as filtering on many different fields, full-text search, or ad hoc reporting; then, DynamoDB can become limiting or inefficient.
+- **Unpredictable or Ad Hoc Access Patterns**: DynamoDB performs best when your access patterns are well-defined in advance. If your application requires flexible, dynamic queries: such as filtering on many different fields, full-text search, or ad hoc reporting; then, DynamoDB can become limiting or inefficient.
 
 - **You Need Complex Relational Logic**
 DynamoDB doesn't support joins like a traditional relational database. If your application depends heavily on multi-table joins or complex relational logic, a relational database may be a better fit.
@@ -17,12 +17,9 @@ DynamoDB doesn't support joins like a traditional relational database. If your a
 - **Large Binary Objects (BLOBs)**
 DynamoDB binary or blob data (like images, videos, or documents) is limited to 400KB per item.
 
-- **You’re On a Tight Budget With Unpredictable Access Patterns**
-DynamoDB can get expensive if you have unpredictable or spiky workloads it is important to analyze cost implications.
-
 ## When to Use DynamoDB
 
-DynamoDB shines in specific use cases where its strengths—scalability, performance, and architecture can be fully leveraged. Here are some of the best scenarios for using DynamoDB:
+DynamoDB shines in specific use cases where its strengths: scalability, performance, and architecture can be fully leveraged. Here are some of the best scenarios for using DynamoDB:
 
 - **Well-Defined, High-Volume Access Patterns**: DynamoDB performs exceptionally well when your access patterns are predictable and operations are targeted by specific keys. It's ideal for applications that require low-latency lookups at scale.
 
@@ -42,7 +39,7 @@ The fundamental components of DynamoDB:
 
 - **Primary Key**: Every item in a table must have a unique primary key. There are two types:
   
-  - **Simple Primary Key**: Consists of a single attribute, known as the *partition key*.
+  - **Simple Primary Key**: Consists of a single attribute, known as the *partition key* (internal physical storage).
   
   - **Composite Primary Key**: Combines two attributes: a *partition key* and a *sort key*.
 
@@ -58,33 +55,60 @@ Data modeling in DynamoDB differs significantly from traditional relational data
 
 In this playbook, we'll model a generic lending application - similar to what you'd find in a library or movie rental system - and then create the corresponding DynamoDB tables.
 
-Our model will include all the classic relationship cardinalities: One-to-One, One-to-Many, and Many-to-Many, which we'll implement using DynamoDB data modeling strategies.
+### Entity Diagram
 
-
+Let's model our application as a classic entity relationship diagram.
 ```
-    ┌─|PERSON|───┐
-    │            │
-    │name        │
-    │email       │
-    └──────────┬─┘
+    ┌─|Member|─────┐
+    │              │
+    │name          │
+    │email         │
+    └──────────┬───┘
                │One-to-Many
                │
                │
-    ┌─|ITEM|───┴─┐                ┌─|CATEGORY|─┐   
-    │            │ Many-to-Many   │            │
-    │name        ├────────────────┤name        │
-    │description │                └────────────┘
-    └──────────┬─┘                    
+    ┌─|Loan|───────┐
+    │              │
+    │lentAt        │
+    │returnedAt    │
+    └──────────┬───┘
+               │Many-to-One
+               │
+               │
+    ┌─|Asset───┴──┐                ┌─|Label|────┐
+    │             │ Many-to-Many   │            │
+    │name         ├────────────────┤value       │
+    │description  │                └────────────┘
+    └──────────┬──┘
                │One-to-One
                │
                │
-    ┌─|QrCode|─┴─┐
-    │            │
-    │value       │
-    └────────────┘
+    ┌─|QrCode|─┴──┐
+    │             │
+    │value        │
+    └─────────────┘
 ```
 
-## One-to-One Relationships
+### DynamoDB Model
+
+In contrast to an entity relationship model, a DynamoDB model is often designed as a single denormalized table, containing a composite primary key (partition key and sort key) and all attributes flat in a single table.
+
+For example:
+
+| Attribute Name | Description               |
+|----------------|---------------------------|
+| pk             | Partition Key             |
+| sk             | Sort Key                  |
+| name           | Member or Asset attribute |
+| email          | Member attribute          |
+| lentAt         | Loan attribute            |
+| returnedAt     | Loan attribute            |
+| description    | Asset attribute           |
+| labels         | Label attribute           |
+| qrCode         | QrCode attribute          |
+
+Here is the table above in AWS NoSQL Workbench:
+![Asset Table](./doc/asset_table.png)
 
 
 ## Youtube Videos
@@ -95,5 +119,8 @@ Our model will include all the classic relationship cardinalities: One-to-One, O
 - AWS re:Invent 2024 - Advanced data modeling with Amazon DynamoDB (DAT404)
     - https://youtu.be/hjqrDqVaiw0
 
-- AWS re:Invent 2020: Data modeling with Amazon DynamoDB – Part 1
+- AWS re:Invent 2020: Data modeling with Amazon DynamoDB - Part 1
     - https://youtu.be/fiP2e-g-r4g
+
+- AWS re:Invent 2019: Data modeling with Amazon DynamoDB (CMY304)
+    - https://youtu.be/DIQVJqiSUkE
