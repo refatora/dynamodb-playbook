@@ -1,3 +1,6 @@
+# Docker
+docker/dynamodb/shared-local-instance.db
+
 # Logs
 logs
 *.log
